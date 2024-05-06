@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "component_view",
+	"version": "${version}",
+	"name": "Component View",
+	"description": "Shows components for ItemStacks \nAlso known as WTHITC (What The Heck Is That Component)",
+	"authors": [
+		"Survivalblock"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/component-view",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT-0",
+	"icon": "assets/component_view/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"survivalblock.componentview.common.ComponentView"
+		],
+		"client": [
+			"survivalblock.componentview.client.ComponentViewClient"
+		],
+		"modmenu": [
+			"survivalblock.componentview.common.config.ModMenuCompat"
+		]
+	},
+	"mixins": [
+		"component_view.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": ">=1.20.6",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

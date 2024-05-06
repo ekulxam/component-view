@@ -1,0 +1,15 @@
+{
+  "componentview.yacl.category.main": "Component View Config",
+  "componentview.yacl.category.main.tooltip": "Powered by YetAnotherConfigLib",
+  "componentview.yacl.group.client": "Client Configuration",
+  "componentview.yacl.option.boolean.advancedtooltips": "Show in Advanced Tooltips",
+  "componentview.yacl.option.boolean.advancedtooltips.desc": "Show when Advanced Tooltips are on, without needing to press any keybinds",
+  "componentview.yacl.option.boolean.identifier": "Attempt to translate identifier",
+  "componentview.yacl.option.boolean.identifier.desc": "If pressing alt or control (option or command on Mac), attempts to translate the component type via identifier. This doesn't really do anything (yet) as components don't have translation keys.",
+  "componentview.yacl.option.color.type": "Component Type Color",
+  "componentview.yacl.option.color.type.desc": "When pressing shift, the component types appear in this color",
+  "componentview.yacl.option.color.value": "Component Value Color",
+  "componentview.yacl.option.color.value.desc": "When pressing shift, the component values appear in this color",
+  "componentview.yacl.group.list.hiddencomponents": "Hidden Components",
+  "componentview.yacl.group.list.hiddencomponents.desc": "Add components by their type here (such as minecraft:rarity) to remove them from the tooltip. Please visit the Minecraft Wiki page on Data Component Format to see a list of vanilla components."
+}
