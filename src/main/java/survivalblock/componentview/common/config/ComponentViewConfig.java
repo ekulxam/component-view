@@ -14,6 +14,7 @@ public class ComponentViewConfig {
     public static Color componentTypeColor = new Color(5635925);
     public static Color componentValueColor= new Color(11184810);
     public static List<String> removedComponents = new ArrayList<>();
+    public static boolean shiftOppositeEffect = false;
 
     public static Screen create(Screen parent) {
         return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.create(parent) : parent;

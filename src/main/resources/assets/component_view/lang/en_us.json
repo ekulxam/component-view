@@ -7,9 +7,11 @@
   "componentview.yacl.option.boolean.identifier": "Attempt to translate identifier",
   "componentview.yacl.option.boolean.identifier.desc": "If pressing alt or control (option or command on Mac), attempts to translate the component type via identifier. This doesn't really do anything (yet) as components don't have translation keys.",
   "componentview.yacl.option.color.type": "Component Type Color",
-  "componentview.yacl.option.color.type.desc": "When pressing shift, the component types appear in this color",
+  "componentview.yacl.option.color.type.desc": "When pressing shift, the component types appear in this color.",
   "componentview.yacl.option.color.value": "Component Value Color",
-  "componentview.yacl.option.color.value.desc": "When pressing shift, the component values appear in this color",
+  "componentview.yacl.option.color.value.desc": "When pressing shift, the component values appear in this color.",
+  "componentview.yacl.option.boolean.shiftopposite": "Opposite Shift Function",
+  "componentview.yacl.option.color.shiftopposite.desc": "Pressing shift will make colors duller instead of brighter. Colors will be brighter by default.",
   "componentview.yacl.group.list.hiddencomponents": "Hidden Components",
   "componentview.yacl.group.list.hiddencomponents.desc": "Add components by their type here (such as minecraft:rarity) to remove them from the tooltip. Please visit the Minecraft Wiki page on Data Component Format to see a list of vanilla components."
 }

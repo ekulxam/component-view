@@ -31,8 +31,9 @@ public class ComponentViewClient implements ClientModInitializer {
 		if (ComponentViewConfig.removedComponents.contains(component.type().toString())) {
 			return;
 		}
-		int glow = Screen.hasShiftDown() ? ComponentViewConfig.componentTypeColor.getRGB() : 5592405;
-		int lighter = Screen.hasShiftDown() ? ComponentViewConfig.componentValueColor.getRGB() : 5592405;
+		boolean vibrant = (Screen.hasShiftDown() && !ComponentViewConfig.shiftOppositeEffect) || (!Screen.hasShiftDown() && ComponentViewConfig.shiftOppositeEffect); // XOR
+		int glow = vibrant ? ComponentViewConfig.componentTypeColor.getRGB() : 5592405;
+		int lighter = vibrant ? ComponentViewConfig.componentValueColor.getRGB() : 5592405;
 		if (ComponentViewConfig.translateThroughIdentifier && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null) {
 			lines.add(Text.literal(id.toTranslationKey()).withColor(glow)
 					.append(Text.literal(" : ").withColor(glow))
