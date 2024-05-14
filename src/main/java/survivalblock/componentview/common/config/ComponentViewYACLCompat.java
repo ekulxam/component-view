@@ -9,7 +9,6 @@ import net.minecraft.text.Text;
 import survivalblock.componentview.common.ComponentView;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ComponentViewYACLCompat {
 
@@ -50,16 +49,22 @@ public class ComponentViewYACLCompat {
                                         .controller(ColorControllerBuilder::create)
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
-                                    .name(Text.translatable("componentview.yacl.option.boolean.shiftopposite"))
-                                    .description(OptionDescription.of(Text.translatable("componentview.yacl.option.color.shiftopposite.desc")))
-                                    .binding(false, () -> ComponentViewConfig.shiftOppositeEffect, newVal -> ComponentViewConfig.shiftOppositeEffect = newVal)
-                                    .controller(BooleanControllerBuilder::create)
-                                    .build())
+                                        .name(Text.translatable("componentview.yacl.option.boolean.shiftopposite"))
+                                        .description(OptionDescription.of(Text.translatable("componentview.yacl.option.boolean.shiftopposite.desc")))
+                                        .binding(false, () -> ComponentViewConfig.shiftOppositeEffect, newVal -> ComponentViewConfig.shiftOppositeEffect = newVal)
+                                        .controller(BooleanControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable("componentview.yacl.option.boolean.onlyshowcomponenttypes"))
+                                        .description(OptionDescription.of(Text.translatable("componentview.yacl.option.boolean.onlyshowcomponenttypes.desc")))
+                                        .binding(false, () -> ComponentViewConfig.onlyShowComponentTypes, newVal -> ComponentViewConfig.onlyShowComponentTypes = newVal)
+                                        .controller(BooleanControllerBuilder::create)
+                                        .build())
                                 .build())
                         .group((ListOption.<String>createBuilder()
                                 .name(Text.translatable("componentview.yacl.group.list.hiddencomponents"))
                                 .description(OptionDescription.of(Text.translatable("componentview.yacl.group.list.hiddencomponents.desc")))
-                                .binding(new ArrayList<>(), () -> ComponentViewConfig.removedComponents, newVal -> ComponentViewConfig.removedComponents = newVal)
+                                .binding(ComponentViewConfig.DEFAULT_REMOVED_COMPONENTS, () -> ComponentViewConfig.removedComponents, newVal -> ComponentViewConfig.removedComponents = newVal)
                                 .controller(StringControllerBuilder::create)
                                 .initial("")
                                 .build()))

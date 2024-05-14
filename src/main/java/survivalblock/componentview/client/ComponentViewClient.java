@@ -20,28 +20,36 @@ public class ComponentViewClient implements ClientModInitializer {
 		ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) -> {
 			if ((MinecraftClient.getInstance().options.advancedItemTooltips && ComponentViewConfig.alwaysShowAdvancedTooltips) || Screen.hasControlDown() || Screen.hasAltDown() || Screen.hasShiftDown()) {
 				for (Component<?> component : stack.getComponents()) {
-					Identifier id = Registries.DATA_COMPONENT_TYPE.getId(component.type());
-                    componentView(lines, component, id);
+                    componentView(lines, component);
                 }
 			}
 		});
 	}
 
-	private static void componentView(List<Text> lines, Component<?> component, Identifier id){
+	private static void componentView(List<Text> lines, Component<?> component){
 		if (ComponentViewConfig.removedComponents.contains(component.type().toString())) {
 			return;
 		}
 		boolean vibrant = (Screen.hasShiftDown() && !ComponentViewConfig.shiftOppositeEffect) || (!Screen.hasShiftDown() && ComponentViewConfig.shiftOppositeEffect); // XOR
 		int glow = vibrant ? ComponentViewConfig.componentTypeColor.getRGB() : 5592405;
 		int lighter = vibrant ? ComponentViewConfig.componentValueColor.getRGB() : 5592405;
-		if (ComponentViewConfig.translateThroughIdentifier && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null) {
-			lines.add(Text.literal(id.toTranslationKey()).withColor(glow)
-					.append(Text.literal(" : ").withColor(glow))
-					.append(Text.literal(component.value().toString()).withColor(lighter)));
+		Identifier id = Registries.DATA_COMPONENT_TYPE.getId(component.type());
+		if (ComponentViewConfig.onlyShowComponentTypes) {
+			if (ComponentViewConfig.translateThroughIdentifier && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null) {
+				lines.add(Text.literal(id.toTranslationKey()).withColor(glow));
+			} else {
+				lines.add(Text.literal(component.type().toString()).withColor(glow));
+			}
 		} else {
-			lines.add(Text.literal(component.type().toString()).withColor(glow)
-					.append(Text.literal(" : ").withColor(glow))
-					.append(Text.literal(component.value().toString()).withColor(lighter)));
+			if (ComponentViewConfig.translateThroughIdentifier && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null) {
+				lines.add(Text.literal(id.toTranslationKey()).withColor(glow)
+						.append(Text.literal(" : ").withColor(glow))
+						.append(Text.literal(component.value().toString()).withColor(lighter)));
+			} else {
+				lines.add(Text.literal(component.type().toString()).withColor(glow)
+						.append(Text.literal(" : ").withColor(glow))
+						.append(Text.literal(component.value().toString()).withColor(lighter)));
+			}
 		}
 	}
 }
