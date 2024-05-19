@@ -1,2 +1,2 @@
-Component View 1.0.2
-- Added the **Remove Underscores and Namespace** config option, which tries to make component types actually readable English by removing underscores and namespace from the identifiers.
+Component View 1.0.3
+- Added the **Format Using Newlines** config option, which tries to format component values with newlines at brackets, parentheses, and commas.
