@@ -9,22 +9,63 @@ import java.util.List;
 
 public class ComponentViewConfig {
 
-    public static boolean alwaysShowAdvancedTooltips = true;
-    public static boolean translateThroughIdentifier = false;
-    public static boolean removeUnderscoresAndNamespace = false;
-    public static Color componentTypeColor = new Color(5635925);
-    public static Color componentValueColor= new Color(11184810);
-    public static List<String> removedComponents = new ArrayList<>();
-    public static boolean shiftOppositeEffect = false;
-    public static boolean onlyShowComponentTypes = false;
-    public static boolean showNormallyHiddenComponents = true;
-    public static boolean formatUsingNewlines = false;
+    private static class Defaults {
+        private static final boolean alwaysShowAdvancedTooltips = true;
+        private static final boolean translateThroughIdentifier = false;
+        private static final boolean removeUnderscoresAndNamespace = false;
+        private static final Color componentTypeColor = new Color(5635925);
+        private static final Color componentValueColor= new Color(11184810);
+        private static final List<String> removedComponents = new ArrayList<>();
+        private static final boolean shiftOppositeEffect = false;
+        private static final boolean onlyShowComponentTypes = false;
+        private static final boolean showNormallyHiddenComponents = true;
+        private static final boolean formatUsingNewlines = false;
+    }
+
+    public static boolean isAlwaysShowAdvancedTooltips() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().alwaysShowAdvancedTooltips : Defaults.alwaysShowAdvancedTooltips;
+    }
+
+    public static boolean isTranslateThroughIdentifier() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().translateThroughIdentifier : Defaults.translateThroughIdentifier;
+    }
+
+    public static boolean isRemoveUnderscoresAndNamespace() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().removeUnderscoresAndNamespace : Defaults.removeUnderscoresAndNamespace;
+    }
+
+    public static Color getComponentTypeColor() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().componentTypeColor : Defaults.componentTypeColor;
+    }
+
+    public static Color getComponentValueColor() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().componentValueColor : Defaults.componentValueColor;
+    }
+
+    public static List<String> getRemovedComponents() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().removedComponents : Defaults.removedComponents;
+    }
+
+    public static boolean isShiftOppositeEffect() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().shiftOppositeEffect : Defaults.shiftOppositeEffect;
+    }
+
+    public static boolean isOnlyShowComponentTypes() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().onlyShowComponentTypes : Defaults.onlyShowComponentTypes;
+    }
+
+    public static boolean isShowNormallyHiddenComponents() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().showNormallyHiddenComponents : Defaults.showNormallyHiddenComponents;
+    }
+
+    public static boolean isFormatUsingNewlines() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().formatUsingNewlines : Defaults.formatUsingNewlines;
+    }
 
     public static final List<String> DEFAULT_REMOVED_COMPONENTS = new ArrayList<>();
 
-
     public static Screen create(Screen parent) {
-        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.create(parent) : parent;
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.create(parent) : null;
     }
 
     static {
@@ -51,6 +92,6 @@ public class ComponentViewConfig {
         DEFAULT_REMOVED_COMPONENTS.add("minecraft:tool");
         DEFAULT_REMOVED_COMPONENTS.add("minecraft:writable_book_content");
         DEFAULT_REMOVED_COMPONENTS.add("minecraft:written_book_content");
-        removedComponents.addAll(DEFAULT_REMOVED_COMPONENTS);
+        Defaults.removedComponents.addAll(DEFAULT_REMOVED_COMPONENTS);
     }
 }

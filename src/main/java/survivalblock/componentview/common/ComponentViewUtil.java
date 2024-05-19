@@ -1,6 +1,8 @@
 package survivalblock.componentview.common;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.component.Component;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
@@ -33,17 +35,17 @@ public class ComponentViewUtil {
      * @param component the component trying to be added to the tooltip
      */
     public static void componentView(List<Text> lines, Component<?> component){
-        if (ComponentViewConfig.removedComponents.contains(component.type().toString())) {
+        if (ComponentViewConfig.getRemovedComponents().contains(component.type().toString())) {
             return;
         }
-        if (ComponentViewConfig.showNormallyHiddenComponents && canBeHiddenFromTooltip(component) && !isHiddenFromTooltip(component)) {
+        if (ComponentViewConfig.isShowNormallyHiddenComponents() && canBeHiddenFromTooltip(component) && !isHiddenFromTooltip(component)) {
             return;
         }
-        boolean vibrant = (Screen.hasShiftDown() && !ComponentViewConfig.shiftOppositeEffect) || (!Screen.hasShiftDown() && ComponentViewConfig.shiftOppositeEffect); // XOR
-        int glow = vibrant ? ComponentViewConfig.componentTypeColor.getRGB() : 5592405;
+        boolean vibrant = (Screen.hasShiftDown() && !ComponentViewConfig.isShiftOppositeEffect()) || (!Screen.hasShiftDown() && ComponentViewConfig.isShiftOppositeEffect()); // XOR
+        int glow = vibrant ? ComponentViewConfig.getComponentTypeColor().getRGB() : 5592405;
         MutableText mutableText;
         Identifier id = Registries.DATA_COMPONENT_TYPE.getId(component.type());
-        if (ComponentViewConfig.removeUnderscoresAndNamespace && id != null) {
+        if (ComponentViewConfig.isRemoveUnderscoresAndNamespace() && id != null) {
             String string = id.getPath();
             //
             string = string.replaceAll("_", " ");
@@ -51,7 +53,7 @@ public class ComponentViewUtil {
             string = WordUtils.capitalizeFully(string);
             mutableText = Text.literal(string);
         } else {
-            boolean canTranslate = ComponentViewConfig.translateThroughIdentifier && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null;
+            boolean canTranslate = ComponentViewConfig.isTranslateThroughIdentifier() && (Screen.hasControlDown() || Screen.hasAltDown()) && id != null;
             mutableText = Text.literal(canTranslate ? id.toTranslationKey() : component.type().toString());
         }
         mutableText = mutableText.withColor(glow);
@@ -60,20 +62,20 @@ public class ComponentViewUtil {
     }
 
     public static void appendValues(Component<?> component, MutableText mutableText, boolean vibrant, int glow) {
-        if (ComponentViewConfig.onlyShowComponentTypes) {
+        if (ComponentViewConfig.isOnlyShowComponentTypes()) {
             return;
         }
-        int lighter = vibrant ? ComponentViewConfig.componentValueColor.getRGB() : 5592405;
+        int lighter = vibrant ? ComponentViewConfig.getComponentValueColor().getRGB() : 5592405;
         mutableText.append(Text.literal(" : ").withColor(glow));
         String string = component.value().toString();
-        if (ComponentViewConfig.formatUsingNewlines) {
+        if (ComponentViewConfig.isFormatUsingNewlines()) {
             string = whyDoINeedToIndentAgain(string);
         }
         mutableText.append(Text.literal(string).withColor(lighter));
     }
 
     /**
-     * Uses strings to check if a component has a showInTooltip field and then captures that value.. .
+     * Uses strings to check if a component has a showInTooltip field and then captures that value.
      * @param component the component to check the showInTooltip field
      * @return true if the component is hidden from tooltips
      */
@@ -105,8 +107,10 @@ public class ComponentViewUtil {
      */
     public static String whyDoINeedToIndentAgain(final String string) {
         // BIG O NOTATION: O(n) by itself (pretty good)
+        // O(n^2) in total (I think) because of the ArrayList#contains operations
         int i = 0;
         int indentations = 0;
+        //noinspection StringOperationCanBeSimplified
         String mutableString = string.toString(); // I'm not taking any chances
         while (i < mutableString.length()) {
             Character character = mutableString.charAt(i);
@@ -158,7 +162,7 @@ public class ComponentViewUtil {
                         char nextChar = mutableString.charAt(i + 1);
                         if (nextChar != ',') {
                             StringBuilder stringBuilder = new StringBuilder(mutableString);
-                            stringBuilder.deleteCharAt(i); // delete yourself, insert blanks, then append yourself at the end of those blanks so you end up on the new line
+                            stringBuilder.deleteCharAt(i); // delete yourself, insert blanks, then append yourself at the end of those blanks, so you end up on the new line
                             mutableString = stringBuilder.toString();
                             mutableString = mutableString.substring(0, i) + "\n" + blanks + character + mutableString.substring(i);
                         }
@@ -206,5 +210,15 @@ public class ComponentViewUtil {
         return mutableString.substring(0, i + 1) + "\n" + blanks.toString() + mutableString.substring(i + 1);
     }
 
-
+    public static boolean shouldShowInAdvancedTooltips() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client == null) {
+            return false;
+        }
+        GameOptions options = client.options;
+        if (options == null) {
+            return false;
+        }
+        return options.advancedItemTooltips && ComponentViewConfig.isAlwaysShowAdvancedTooltips();
+    }
 }
