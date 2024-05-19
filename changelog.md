@@ -1,27 +1,2 @@
-Component View 1.0.1
-- Added the **Only Show Component Types** config option, which prevents the component values from showing. This helps see all the component types of an item to help decide what types to put in the Removed Components config list
-- Added the following component types as **defaults** for the Removed Components config list:
-  - "minecraft:banner_patterns"
-  - "minecraft:base_color"
-  - "minecraft:bundle_contents"
-  - "minecraft:charged_projectiles"
-  - "minecraft:custom_name"
-  - "minecraft:damage"
-  - "minecraft:dyed_color"
-  - "minecraft:enchantment_glint_override"
-  - "minecraft:instrument"
-  - "minecraft:intangible_projectile"
-  - "minecraft:item_name"
-  - "minecraft:lore"
-  - "minecraft:map_color"
-  - "minecraft:map_decorations"
-  - "minecraft:map_id"
-  - "minecraft:max_damage"
-  - "minecraft:max_stack_size"
-  - "minecraft:note_block_sound"
-  - "minecraft:map_decorations"
-  - "minecraft:rarity"
-  - "minecraft:tool"
-  - "minecraft:writable_book_content"
-  - "minecraft:written_book_content"
-- My reasoning being that most of these component types have some sort of visual indication already, and therefore do not need to be shown by this mod.
+Component View 1.0.2
+- Added the **Remove Underscores and Namespace** config option, which tries to make component types actually readable English by removing underscores and namespace from the identifiers.

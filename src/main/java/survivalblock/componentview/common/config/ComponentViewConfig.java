@@ -10,12 +10,15 @@ import java.util.List;
 public class ComponentViewConfig {
 
     public static boolean alwaysShowAdvancedTooltips = true;
-    public static boolean translateThroughIdentifier = true;
+    public static boolean translateThroughIdentifier = false;
+    public static boolean removeUnderscoresAndNamespace = false;
     public static Color componentTypeColor = new Color(5635925);
     public static Color componentValueColor= new Color(11184810);
     public static List<String> removedComponents = new ArrayList<>();
     public static boolean shiftOppositeEffect = false;
     public static boolean onlyShowComponentTypes = false;
+    public static boolean showNormallyHiddenComponents = true;
+    public static boolean formatUsingNewlines = false;
 
     public static final List<String> DEFAULT_REMOVED_COMPONENTS = new ArrayList<>();
 

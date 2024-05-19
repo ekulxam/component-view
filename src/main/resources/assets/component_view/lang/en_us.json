@@ -5,7 +5,7 @@
   "componentview.yacl.option.boolean.advancedtooltips": "Show in Advanced Tooltips",
   "componentview.yacl.option.boolean.advancedtooltips.desc": "Show when Advanced Tooltips are on, without needing to press any keybinds",
   "componentview.yacl.option.boolean.identifier": "Attempt to translate identifier",
-  "componentview.yacl.option.boolean.identifier.desc": "If pressing alt or control (option or command on Mac), attempts to translate the component type via identifier. This doesn't really do anything (yet) as components don't have translation keys.",
+  "componentview.yacl.option.boolean.identifier.desc": "If pressing alt or control (option or command on Mac), attempts to translate the component type via identifier. This does not have any amazing changes (yet) as components do not have translation keys.",
   "componentview.yacl.option.color.type": "Component Type Color",
   "componentview.yacl.option.color.type.desc": "When pressing shift, the component types appear in this color.",
   "componentview.yacl.option.color.value": "Component Value Color",
@@ -14,6 +14,12 @@
   "componentview.yacl.option.boolean.shiftopposite.desc": "Pressing shift will make colors duller instead of brighter. Colors will be brighter by default.",
   "componentview.yacl.option.boolean.onlyshowcomponenttypes": "Only Show Component Types",
   "componentview.yacl.option.boolean.onlyshowcomponenttypes.desc": "Hides the component values, makes it easier to see the component types and potentially remove them (see Hidden Components).",
+  "componentview.yacl.option.boolean.removeunderscoresandnamespace": "Remove Underscores And Namespace",
+  "componentview.yacl.option.boolean.removeunderscoresandnamespace.desc": "Tries to put component types in actually readable English by removing the namespace and underscores.",
+  "componentview.yacl.option.boolean.shownormallyhiddencomponents": "Show Normally Hidden Components",
+  "componentview.yacl.option.boolean.shownormallyhiddencomponents.desc": "If a component (such as minecraft:enchantments) can show itself in the tooltip but purposefully hides itself, Component View will add the component to the tooltip. Otherwise, Component View will not add the component to the tooltip because it has already shown itself.",
+  "componentview.yacl.option.boolean.formatusingnewlines": "Format Using Newlines",
+  "componentview.yacl.option.boolean.formatusingnewlines.desc": "Requires tooltip fix. Attempts to format components with newlines at brackets, parentheses, and commas.",
   "componentview.yacl.group.list.hiddencomponents": "Hidden Components",
   "componentview.yacl.group.list.hiddencomponents.desc": "Add components by their type here (such as minecraft:rarity, minecraft:max_stack_size, minecraft:attribute_modifiers, or minecraft:tool) to remove them from the tooltip. Please visit the Minecraft Wiki page on Data Component Format (Java Edition) to see a list of vanilla components."
 }
