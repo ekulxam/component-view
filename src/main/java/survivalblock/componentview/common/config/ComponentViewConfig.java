@@ -10,6 +10,7 @@ import java.util.List;
 public class ComponentViewConfig {
 
     private static class Defaults {
+        public static boolean shouldRun = true;
         private static final boolean alwaysShowAdvancedTooltips = true;
         private static final boolean translateThroughIdentifier = false;
         private static final boolean removeUnderscoresAndNamespace = false;
@@ -20,6 +21,10 @@ public class ComponentViewConfig {
         private static final boolean onlyShowComponentTypes = false;
         private static final boolean showNormallyHiddenComponents = true;
         private static final boolean formatUsingNewlines = false;
+    }
+
+    public static boolean shouldRun() {
+        return ComponentView.shouldDoConfig ? ComponentViewYACLCompat.HANDLER.instance().shouldRun : Defaults.shouldRun;
     }
 
     public static boolean isAlwaysShowAdvancedTooltips() {

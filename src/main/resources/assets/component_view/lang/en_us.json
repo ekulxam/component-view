@@ -2,6 +2,8 @@
   "componentview.yacl.category.main": "Component View Config",
   "componentview.yacl.category.main.tooltip": "Powered by YetAnotherConfigLib",
   "componentview.yacl.group.client": "Client Configuration",
+  "componentview.yacl.option.boolean.shouldRun": "Should Activate",
+  "componentview.yacl.option.boolean.shouldRun.desc": "Turn this off to stop component view from doing things.",
   "componentview.yacl.option.boolean.advancedtooltips": "Show in Advanced Tooltips",
   "componentview.yacl.option.boolean.advancedtooltips.desc": "Show when Advanced Tooltips are on, without needing to press any keybinds",
   "componentview.yacl.option.boolean.identifier": "Attempt to translate identifier",

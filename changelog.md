@@ -1,2 +1,2 @@
-Component View 1.0.4
-- Fixed the config not saving after restarting the game
+Component View 1.0.5
+- Fixed config being named my_mod.json5 (sorry)

@@ -20,6 +20,7 @@ import java.util.List;
 
 public class ComponentViewYACLCompat {
 
+
     public static Screen create(Screen parent){
         if (!ComponentView.shouldDoConfig) {
             throw new UnsupportedOperationException();
@@ -30,8 +31,13 @@ public class ComponentViewYACLCompat {
                         .name(Text.translatable("componentview.yacl.category.main"))
                         .tooltip(Text.translatable("componentview.yacl.category.main.tooltip"))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("componentview.yacl.group.client"))
-                                .description(OptionDescription.of(Text.translatable("componentview.yacl.option.color.type.desc")))
+                                .name(Text.translatable("componentview.yacl.group.client")).
+                                option(Option.<Boolean>createBuilder()
+                                        .name(Text.translatable("componentview.yacl.option.boolean.shouldRun"))
+                                        .description(OptionDescription.of(Text.translatable("componentview.yacl.option.boolean.shouldRun.desc")))
+                                        .binding(ComponentViewYACLCompat.HANDLER.defaults().shouldRun, () -> ComponentViewYACLCompat.HANDLER.instance().shouldRun, newVal -> ComponentViewYACLCompat.HANDLER.instance().shouldRun = newVal)
+                                        .controller(BooleanControllerBuilder::create)
+                                        .build())
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("componentview.yacl.option.boolean.advancedtooltips"))
                                         .description(OptionDescription.of(Text.translatable("componentview.yacl.option.boolean.advancedtooltips.desc")))
@@ -101,14 +107,16 @@ public class ComponentViewYACLCompat {
     }
 
     public static ConfigClassHandler<ComponentViewYACLCompat> HANDLER = ConfigClassHandler.createBuilder(ComponentViewYACLCompat.class)
-            .id(new Identifier(ComponentView.MOD_ID, "my_config"))
+            .id(new Identifier(ComponentView.MOD_ID, "component_view"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
-                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("my_mod.json5"))
+                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("component_view.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
                     .setJson5(true)
                     .build())
             .build();
 
+    @SerialEntry
+    public boolean shouldRun = true;
     @SerialEntry
     public boolean alwaysShowAdvancedTooltips = true;
     @SerialEntry
